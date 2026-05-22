@@ -76,27 +76,39 @@
     let idx = sites.findIndex(function (s) {
       return entryNorms(s).indexOf(here) !== -1
     })
-    if (idx === -1) {
-      const hereHost = new URL(window.location.href).host
-        .replace(/^www\./, '')
-        .toLowerCase()
-      idx = sites.findIndex(function (s) {
-        try {
-          if (new URL(s.url).host.replace(/^www\./, '').toLowerCase() === hereHost) return true
-        } catch (e) {}
-        if (Array.isArray(s.aliases)) {
-          return s.aliases.some(function (a) {
-            try {
-              return typeof a === 'string' && new URL(a).host.replace(/^www\./, '').toLowerCase() === hereHost
-            } catch (e) {
-              return false
+    if (idx !== -1) return idx
+
+    let bestIdx = -1
+    let maxPathLen = -1
+
+    try {
+      const hereURL = new URL(window.location.href)
+      const hereHost = hereURL.host.replace(/^www\./, '').toLowerCase()
+      const herePath = hereURL.pathname.replace(/\/+$/, '') || '/'
+
+      sites.forEach(function (s, i) {
+        const urls = [s.url].concat(Array.isArray(s.aliases) ? s.aliases : [])
+        urls.forEach(function (u) {
+          try {
+            const uURL = new URL(u)
+            const uHost = uURL.host.replace(/^www\./, '').toLowerCase()
+            if (uHost !== hereHost) return
+
+            const uPath = uURL.pathname.replace(/\/+$/, '') || '/'
+            const uPathSlash = uPath.length > 0 && uPath[uPath.length - 1] === '/' ? uPath : uPath + '/'
+
+            if (herePath === uPath || (herePath + '/').indexOf(uPathSlash) === 0) {
+              if (uPath.length > maxPathLen) {
+                maxPathLen = uPath.length
+                bestIdx = i
+              }
             }
-          })
-        }
-        return false
+          } catch (e) {}
+        })
       })
-    }
-    return idx
+    } catch (e) {}
+
+    return bestIdx
   }
 
   function randomIndex(len, exclude) {

@@ -816,27 +816,39 @@
     function findCurrent(sites) {
       const here = normalise(window.location.href);
       let idx = sites.findIndex((s) => entryNorms(s).includes(here));
-      if (idx === -1) {
-        const hereHost = new URL(window.location.href).host.replace(/^www\./, '').toLowerCase();
-        idx = sites.findIndex((s) => {
-          try {
-            if (new URL(s.url).host.replace(/^www\./, '').toLowerCase() === hereHost) return true;
-          } catch {
-            /* ignore */
-          }
-          if (Array.isArray(s.aliases)) {
-            return s.aliases.some((a) => {
-              try {
-                return typeof a === 'string' && new URL(a).host.replace(/^www\./, '').toLowerCase() === hereHost;
-              } catch {
-                return false;
+      if (idx !== -1) return idx;
+
+      let bestIdx = -1;
+      let maxPathLen = -1;
+
+      try {
+        const hereURL = new URL(window.location.href);
+        const hereHost = hereURL.host.replace(/^www\./, '').toLowerCase();
+        const herePath = hereURL.pathname.replace(/\/+$/, '') || '/';
+
+        sites.forEach((s, i) => {
+          const urls = [s.url, ...(Array.isArray(s.aliases) ? s.aliases : [])];
+          urls.forEach((u) => {
+            try {
+              const uURL = new URL(u);
+              const uHost = uURL.host.replace(/^www\./, '').toLowerCase();
+              if (uHost !== hereHost) return;
+
+              const uPath = uURL.pathname.replace(/\/+$/, '') || '/';
+              const uPathSlash = uPath.endsWith('/') ? uPath : uPath + '/';
+
+              if (herePath === uPath || (herePath + '/').startsWith(uPathSlash)) {
+                if (uPath.length > maxPathLen) {
+                  maxPathLen = uPath.length;
+                  bestIdx = i;
+                }
               }
-            });
-          }
-          return false;
+            } catch (e) {}
+          });
         });
-      }
-      return idx;
+      } catch (e) {}
+
+      return bestIdx;
     }
 
     function randomIndex(len, exclude) {
