@@ -108,7 +108,31 @@
       })
     } catch (e) {}
 
-    return bestIdx
+    if (bestIdx !== -1) return bestIdx
+
+    try {
+      const hereHost = new URL(window.location.href).host.replace(/^www\./, '').toLowerCase()
+      const hereSub = hereHost.split('.')[0]
+      if (hereSub && hereSub.length > 2) {
+        const fallbackIdx = sites.findIndex(function (s) {
+          const sName = (s.name || '').toLowerCase()
+          if (sName && (hereSub === sName || hereSub.indexOf(sName) === 0)) return true
+          const urls = [s.url].concat(Array.isArray(s.aliases) ? s.aliases : [])
+          return urls.some(function (u) {
+            try {
+              const uHost = new URL(u).host.replace(/^www\./, '').toLowerCase()
+              const uSub = uHost.split('.')[0]
+              return uSub && (uSub === hereSub || uSub.indexOf(hereSub) === 0)
+            } catch (e) {
+              return false
+            }
+          })
+        })
+        if (fallbackIdx !== -1) return fallbackIdx
+      }
+    } catch (e) {}
+
+    return -1
   }
 
   function randomIndex(len, exclude) {
@@ -161,8 +185,8 @@
     let randIdx
 
     if (idx === -1) {
-      prevIdx = 0
-      nextIdx = len > 1 ? 1 : 0
+      prevIdx = len - 1
+      nextIdx = 0
       randIdx = randomIndex(len, -1)
     } else {
       prevIdx = (idx - 1 + len) % len

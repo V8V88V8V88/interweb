@@ -8,19 +8,22 @@
 
   {
     "name": "abneeeees",
-    "url": "https://abneeeees.github.io",
+    "url": "https://abneeeees.is-a.dev",
+    "aliases": ["https://abneeeees.github.io"],
     "description": "abneeeees is a digital artist from dilli, India"
   },
 
   {
     "name": "v8v88v8v88",
     "url": "https://v8v88v8v88.com",
+    "aliases": ["https://v8v88v8v88.github.io"],
     "description": "Personal website of Vaibhav, a software dev from India"
   },
 
   {
-      "name": "walkingdead",
-      "url": "https://walkingdead1407.github.io",
-      "description": "Tooshar is a part-time human, full-time bug creator and slowly becoming a data scientist."
+    "name": "walkingdead",
+    "url": "https://walkingdead1407.xyz",
+    "aliases": ["https://walkingdead1407.github.io"],
+    "description": "Tooshar is a part-time human, full-time bug creator and slowly becoming a data scientist."
   }
 ]

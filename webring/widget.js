@@ -144,7 +144,31 @@
       })
     } catch (e) {}
 
-    return bestIdx
+    if (bestIdx !== -1) return bestIdx
+
+    try {
+      const hereHost = new URL(window.location.href).host.replace(/^www\./, '').toLowerCase()
+      const hereSub = hereHost.split('.')[0]
+      if (hereSub && hereSub.length > 2) {
+        const fallbackIdx = sites.findIndex((s) => {
+          const sName = (s.name || '').toLowerCase()
+          if (sName && (hereSub === sName || hereSub.startsWith(sName))) return true
+          const urls = [s.url, ...(Array.isArray(s.aliases) ? s.aliases : [])]
+          return urls.some((u) => {
+            try {
+              const uHost = new URL(u).host.replace(/^www\./, '').toLowerCase()
+              const uSub = uHost.split('.')[0]
+              return uSub && (uSub === hereSub || uSub.startsWith(hereSub))
+            } catch {
+              return false
+            }
+          })
+        })
+        if (fallbackIdx !== -1) return fallbackIdx
+      }
+    } catch (e) {}
+
+    return -1
   }
 
   /**
@@ -221,8 +245,8 @@
 
     // If current site not in ring, show a "join" state
     if (idx === -1) {
-      const prevIdx = 0
-      const nextIdx = len > 1 ? 1 : 0
+      const prevIdx = len - 1
+      const nextIdx = 0
       const randIdx = randomIndex(len, -1)
 
       const label = document.createElement('span')
