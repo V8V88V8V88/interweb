@@ -1,6 +1,6 @@
-# Contributing to vaibring
+# Contributing to interweb
 
-vaibring is a curated webring for solid personal sites and indie pages. Anyone can submit a PR; merges are at the curator’s discretion ([Vaibhav](https://github.com/v8v88v8v88)).
+interweb is a curated webring for solid personal sites and indie pages. Anyone can submit a PR; merges are at the curator’s discretion ([Vaibhav](https://github.com/v8v88v8v88)).
 
 ## Adding your site
 
@@ -19,8 +19,8 @@ vaibring is a curated webring for solid personal sites and indie pages. Anyone c
 
    ```html
    <script
-     src="https://v8v88v8v88.github.io/vaibring/webring/widget.js"
-     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json"
+     src="https://v8v88v8v88.github.io/interweb/webring/widget.js"
+     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
      data-theme="retro"
      async
    ></script>
@@ -58,10 +58,10 @@ Things that won't make it:
 | -------------- | ------------ | --------------------------------- |
 | `data-ring`    | *(default: canonical jsDelivr URL)* | URL to `sites.json` (must allow CORS; see README) |
 | `data-theme`   | *(none)*     | `"retro"`, `"dark"`, or omit for light |
-| `data-label`   | `"vaibring"` | Custom label shown in the widget  |
+| `data-label`   | `"interweb"` | Custom label shown in the widget  |
 | `data-hub`     | *(auto)*     | Link for the ring name            |
 
-**minimal.js** — same `data-ring` as the widget. Mark elements with `data-vaibring="prev"`, `"random"`, `"next"`, or pass `data-prev` / `data-next` / `data-random` (CSS selectors). See the main README.
+**minimal.js** — same `data-ring` as the widget. Mark elements with `data-interweb="prev"`, `"random"`, `"next"`, or pass `data-prev` / `data-next` / `data-random` (CSS selectors). See the main README.
 
 ## Reporting issues
 

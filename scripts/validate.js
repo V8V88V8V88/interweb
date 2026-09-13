@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * vaibring — sites.json validator
+ * interweb — sites.json validator
  *
  * Runs in CI on every PR that touches webring/sites.json.
  * Checks:
@@ -172,7 +172,7 @@ sites.forEach((site, i) => {
 // ── Report ────────────────────────────────────────
 
 console.log('')
-console.log(`vaibring validator — ${sites.length} site(s)`)
+console.log(`interweb validator — ${sites.length} site(s)`)
 console.log('─'.repeat(40))
 
 if (warnings.length > 0) {

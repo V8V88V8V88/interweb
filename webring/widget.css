@@ -1,19 +1,19 @@
 /* ============================================================
-   vaibring widget — embeddable webring navigation
+   interweb widget — embeddable webring navigation
    Minimal by default. Retro/hacker theme via data-theme="retro".
    ============================================================ */
 
 /* --- Reset & host isolation --- */
-.vaibring-widget *,
-.vaibring-widget *::before,
-.vaibring-widget *::after {
+.interweb-widget *,
+.interweb-widget *::before,
+.interweb-widget *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 /* --- Base (minimal / light) --- */
-.vaibring-widget {
+.interweb-widget {
   --vb-font: 'Courier New', 'Courier', monospace;
   --vb-bg: #fafafa;
   --vb-border: #d0d0d0;
@@ -43,7 +43,7 @@
 }
 
 /* --- Retro / hacker theme --- */
-.vaibring-widget[data-theme="retro"] {
+.interweb-widget[data-theme="retro"] {
   --vb-bg: #0a0a0a;
   --vb-border: #2a2a2a;
   --vb-text: #b0b0b0;
@@ -54,7 +54,7 @@
 }
 
 /* --- Dark theme --- */
-.vaibring-widget[data-theme="dark"] {
+.interweb-widget[data-theme="dark"] {
   --vb-bg: #1a1a2e;
   --vb-border: #2d2d44;
   --vb-text: #c0c0d0;
@@ -65,29 +65,29 @@
 }
 
 /* --- Navigation links --- */
-.vaibring-widget a {
+.interweb-widget a {
   color: var(--vb-link);
   text-decoration: none;
   transition: color var(--vb-transition), opacity var(--vb-transition);
   white-space: nowrap;
 }
 
-.vaibring-widget a:hover,
-.vaibring-widget a:focus-visible {
+.interweb-widget a:hover,
+.interweb-widget a:focus-visible {
   color: var(--vb-link-hover);
   text-decoration: underline;
   outline: none;
 }
 
 /* --- Separator --- */
-.vaibring-sep {
+.interweb-sep {
   color: var(--vb-accent);
   opacity: 0.5;
   user-select: none;
 }
 
 /* --- Ring label --- */
-.vaibring-label {
+.interweb-label {
   color: var(--vb-accent);
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -95,27 +95,27 @@
   white-space: nowrap;
 }
 
-.vaibring-label a {
+.interweb-label a {
   color: inherit;
 }
 
-.vaibring-label a:hover {
+.interweb-label a:hover {
   color: var(--vb-link-hover);
 }
 
 /* --- Error / loading states --- */
-.vaibring-widget[data-state="loading"] {
+.interweb-widget[data-state="loading"] {
   opacity: 0.6;
 }
 
-.vaibring-widget[data-state="error"] {
+.interweb-widget[data-state="error"] {
   opacity: 0.5;
   font-style: italic;
 }
 
 /* --- Responsive --- */
 @media (max-width: 400px) {
-  .vaibring-widget {
+  .interweb-widget {
     font-size: 12px;
     padding: 8px 10px;
     gap: 6px;

@@ -1,15 +1,15 @@
 /**
- * vaibring — wire prev / random / next on your own markup
+ * interweb — wire prev / random / next on your own markup
  *
  * Put three links (or buttons wrapped in <a>) in your HTML, then load this
  * script after them. It fetches the ring and sets each element's href.
  *
- *   <a data-vaibring="prev" href="#">←</a>
- *   <a data-vaibring="random" href="#">?</a>
- *   <a data-vaibring="next" href="#">→</a>
+ *   <a data-interweb="prev" href="#">←</a>
+ *   <a data-interweb="random" href="#">?</a>
+ *   <a data-interweb="next" href="#">→</a>
  *   <script
- *     src="https://v8v88v8v88.github.io/vaibring/webring/minimal.js"
- *     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json"
+ *     src="https://v8v88v8v88.github.io/interweb/webring/minimal.js"
+ *     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
  *     async
  *   ></script>
  *
@@ -23,9 +23,9 @@
   if (!SCRIPT) return
 
   const VAIBRING_RING_CDN =
-    'https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json'
+    'https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json'
   const VAIBRING_RING_PAGES_LEGACY =
-    'https://v8v88v8v88.github.io/vaibring/webring/sites.json'
+    'https://v8v88v8v88.github.io/interweb/webring/sites.json'
 
   function resolveRingFetchUrl(requested) {
     if (!requested || !String(requested).trim()) return VAIBRING_RING_CDN
@@ -45,10 +45,10 @@
 
   var FETCH_RING_URL = resolveRingFetchUrl(SCRIPT.getAttribute('data-ring'))
 
-  const SEL_PREV = SCRIPT.getAttribute('data-prev') || '[data-vaibring="prev"]'
-  const SEL_NEXT = SCRIPT.getAttribute('data-next') || '[data-vaibring="next"]'
+  const SEL_PREV = SCRIPT.getAttribute('data-prev') || '[data-interweb="prev"]'
+  const SEL_NEXT = SCRIPT.getAttribute('data-next') || '[data-interweb="next"]'
   const SEL_RANDOM =
-    SCRIPT.getAttribute('data-random') || '[data-vaibring="random"]'
+    SCRIPT.getAttribute('data-random') || '[data-interweb="random"]'
 
   function normalise(url) {
     try {
@@ -170,7 +170,7 @@
 
     if (!prevEl && !nextEl && !randEl) {
       console.warn(
-        '[vaibring] minimal.js: no elements matched. Use data-vaibring="prev|next|random" or data-prev / data-next / data-random.'
+        '[interweb] minimal.js: no elements matched. Use data-interweb="prev|next|random" or data-prev / data-next / data-random.'
       )
       return
     }
@@ -215,9 +215,9 @@
       })
       .catch(function (err) {
         console.warn(
-          '[vaibring] minimal.js could not load ring JSON from',
+          '[interweb] minimal.js could not load ring JSON from',
           FETCH_RING_URL,
-          '— prev/next/random links stay as #. Use data-ring with the jsDelivr sites.json URL (see vaibring README); GitHub Pages JSON is often blocked by CORS for cross-origin fetch.',
+          '— prev/next/random links stay as #. Use data-ring with the jsDelivr sites.json URL (see interweb README); GitHub Pages JSON is often blocked by CORS for cross-origin fetch.',
           err
         )
       })

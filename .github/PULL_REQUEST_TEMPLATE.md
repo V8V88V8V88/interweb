@@ -1,4 +1,4 @@
-## Adding my site to vaibring
+## Adding my site to interweb
 
 **Site name:** <!-- e.g. "my cool site" -->
 **Site URL:** <!-- e.g. https://example.com -->

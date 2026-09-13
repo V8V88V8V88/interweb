@@ -1,12 +1,12 @@
 /**
- * vaibring — embeddable webring widget
+ * interweb — embeddable webring widget
  *
  * Usage:
  *   <script
- *     src="https://v8v88v8v88.github.io/vaibring/webring/widget.js"
- *     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json"
+ *     src="https://v8v88v8v88.github.io/interweb/webring/widget.js"
+ *     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
  *     data-theme="retro"          <!-- optional: "retro" | "dark" | omit for light -->
- *     data-label="vaibring"       <!-- optional: custom ring name -->
+ *     data-label="interweb"       <!-- optional: custom ring name -->
  *     async
  *   ></script>
  *
@@ -28,10 +28,10 @@
    * fetch() works from any origin (unlike raw github.io for static JSON).
    */
   const VAIBRING_RING_CDN =
-    'https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json'
+    'https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json'
   /** Legacy default; still rewritten to CDN so old embeds work cross-origin. */
   const VAIBRING_RING_PAGES_LEGACY =
-    'https://v8v88v8v88.github.io/vaibring/webring/sites.json'
+    'https://v8v88v8v88.github.io/interweb/webring/sites.json'
 
   function resolveRingFetchUrl(requested) {
     if (!requested || !String(requested).trim()) return VAIBRING_RING_CDN
@@ -52,12 +52,12 @@
   var FETCH_RING_URL = resolveRingFetchUrl(SCRIPT.getAttribute('data-ring'))
 
   const THEME = SCRIPT.getAttribute('data-theme') || ''
-  const LABEL = SCRIPT.getAttribute('data-label') || 'vaibring'
-  const HUB_URL = SCRIPT.getAttribute('data-hub') || 'https://v8v88v8v88.com/vaibring'
+  const LABEL = SCRIPT.getAttribute('data-label') || 'interweb'
+  const HUB_URL = SCRIPT.getAttribute('data-hub') || 'https://v8v88v8v88.com/interweb'
 
   // ── Inject CSS (once) ──────────────────────────────────────
 
-  const CSS_ID = 'vaibring-css'
+  const CSS_ID = 'interweb-css'
   if (!document.getElementById(CSS_ID)) {
     const cssUrl = FETCH_RING_URL.replace(/sites\.json$/i, 'widget.css')
     const link = document.createElement('link')
@@ -70,7 +70,7 @@
   // ── Build container ────────────────────────────────────────
 
   const widget = document.createElement('div')
-  widget.className = 'vaibring-widget'
+  widget.className = 'interweb-widget'
   widget.setAttribute('role', 'navigation')
   widget.setAttribute('aria-label', LABEL + ' webring')
   if (THEME) widget.setAttribute('data-theme', THEME)
@@ -82,7 +82,7 @@
 
   /**
    * Normalise a URL for comparison: host, path without /index.html, no trailing slash,
-   * lowercase (so /vaibring and /vaibring/ and /vaibring/index.html match the ring entry).
+   * lowercase (so /interweb and /interweb/ and /interweb/index.html match the ring entry).
    */
   function normalise(url) {
     try {
@@ -222,7 +222,7 @@
 
   function makeSep() {
     const span = document.createElement('span')
-    span.className = 'vaibring-sep'
+    span.className = 'interweb-sep'
     span.textContent = '|'
     span.setAttribute('aria-hidden', 'true')
     return span
@@ -250,7 +250,7 @@
       const randIdx = randomIndex(len, -1)
 
       const label = document.createElement('span')
-      label.className = 'vaibring-label'
+      label.className = 'interweb-label'
       label.appendChild(makeLabelLink(HUB_URL, LABEL))
 
       widget.appendChild(label)
@@ -268,7 +268,7 @@
     const randIdx = randomIndex(len, idx)
 
     const label = document.createElement('span')
-    label.className = 'vaibring-label'
+    label.className = 'interweb-label'
     label.appendChild(makeLabelLink(HUB_URL, LABEL))
 
     widget.appendChild(label)
@@ -297,9 +297,9 @@
     })
     .catch(function (err) {
       console.warn(
-        '[vaibring] Could not load ring JSON from',
+        '[interweb] Could not load ring JSON from',
         FETCH_RING_URL,
-        '— check Network tab (CORS or blocked request). Use data-ring with the jsDelivr URL from the vaibring README, or ensure your ring file allows cross-origin GET.',
+        '— check Network tab (CORS or blocked request). Use data-ring with the jsDelivr URL from the interweb README, or ensure your ring file allows cross-origin GET.',
         err
       )
       widget.setAttribute('data-state', 'error')

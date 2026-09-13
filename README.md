@@ -1,8 +1,8 @@
-# Vaibring
+# Interweb
 
 A small webring for sites with real ball knowledge: good design, honest pages, no filler. PRs welcome; [Vaibhav](https://github.com/v8v88v8v88) curates what lands in the ring.
 
-**[→ vaibring hub](https://v8v88v8v88.com/vaibring)**
+**[→ interweb hub](https://v8v88v8v88.com/interweb)**
 
 ---
 
@@ -10,7 +10,7 @@ A small webring for sites with real ball knowledge: good design, honest pages, n
 
 [Webrings](https://en.wikipedia.org/wiki/Webring) were a way for small websites to link to each other in a loop, helping visitors discover new sites. They were everywhere in the 90s, then disappeared when search engines and social media took over.
 
-vaibring brings the idea back as a tight, curated loop:
+interweb brings the idea back as a tight, curated loop:
 
 - **No backend.** The ring is a single JSON file served from GitHub Pages.
 - **No build step.** The widget is vanilla JS + CSS. Drop in one `<script>` tag.
@@ -23,8 +23,8 @@ vaibring brings the idea back as a tight, curated loop:
 
 ```html
 <script
-  src="https://v8v88v8v88.github.io/vaibring/webring/widget.js"
-  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json"
+  src="https://v8v88v8v88.github.io/interweb/webring/widget.js"
+  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
   data-theme="retro"
   async
 ></script>
@@ -38,11 +38,11 @@ Browsers block cross-origin `fetch()` unless the server sends CORS headers. **Gi
 
 **Canonical URL:** use jsDelivr (same file as in the repo, CORS-friendly):
 
-`https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json`
+`https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json`
 
 You do **not** need to copy `sites.json` to your own host. Omit `data-ring` and the scripts default to that URL.
 
-If you still use the old `https://v8v88v8v88.github.io/vaibring/webring/sites.json` value for `data-ring`, the scripts **automatically** fetch that same list via jsDelivr so existing embeds keep working cross-origin.
+If you still use the old `https://v8v88v8v88.github.io/interweb/webring/sites.json` value for `data-ring`, the scripts **automatically** fetch that same list via jsDelivr so existing embeds keep working cross-origin.
 
 **Forks:** `https://cdn.jsdelivr.net/gh/YOUR_USER/YOUR_REPO@main/webring/sites.json`
 
@@ -80,20 +80,20 @@ Submit a pull request when your entry is ready. Merges are reviewed; not every s
 | `src`          | ✓        | -            | URL to `widget.js`                   |
 | `data-ring`    |          | *(canonical jsDelivr URL)* | URL to `sites.json` (must allow CORS; see above) |
 | `data-theme`   |          | *(light)*    | `"retro"` or `"dark"`                |
-| `data-label`   |          | `"vaibring"` | Custom ring name in the widget       |
+| `data-label`   |          | `"interweb"` | Custom ring name in the widget       |
 | `data-hub`     |          | *(auto)*     | URL the ring name links to           |
 
 ### Custom links
 
-Use `minimal.js` instead of the widget when you want your own HTML/CSS. Add three `<a>` tags with `data-vaibring="prev"`, `"random"`, `"next"`, then load the script after them. It fills `href` from `sites.json` (same logic as `widget.js`). Optional: `data-prev`, `data-next`, `data-random` on the script for custom CSS selectors.
+Use `minimal.js` instead of the widget when you want your own HTML/CSS. Add three `<a>` tags with `data-interweb="prev"`, `"random"`, `"next"`, then load the script after them. It fills `href` from `sites.json` (same logic as `widget.js`). Optional: `data-prev`, `data-next`, `data-random` on the script for custom CSS selectors.
 
 ```html
-<a data-vaibring="prev" href="#">←</a>
-<a data-vaibring="random" href="#">random</a>
-<a data-vaibring="next" href="#">→</a>
+<a data-interweb="prev" href="#">←</a>
+<a data-interweb="random" href="#">random</a>
+<a data-interweb="next" href="#">→</a>
 <script
-  src="https://v8v88v8v88.github.io/vaibring/webring/minimal.js"
-  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/vaibring@main/webring/sites.json"
+  src="https://v8v88v8v88.github.io/interweb/webring/minimal.js"
+  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
   async
 ></script>
 ```
@@ -107,7 +107,7 @@ Use `minimal.js` instead of the widget when you want your own HTML/CSS. Add thre
 ## Project structure
 
 ```
-vaibring/
+interweb/
 ├── index.html                  # Hub landing page (GitHub Pages root)
 ├── webring/
 │   ├── sites.json              # The ring registry
@@ -148,7 +148,7 @@ vaibring/
 
 ## Self-hosting
 
-You can fork vaibring and run your own ring. Update in both `widget.js` and `minimal.js`:
+You can fork interweb and run your own ring. Update in both `widget.js` and `minimal.js`:
 
 - `VAIBRING_RING_CDN` — your jsDelivr URL: `https://cdn.jsdelivr.net/gh/USER/REPO@main/webring/sites.json`
 - `VAIBRING_RING_PAGES_LEGACY` — optional `github.io` URL for automatic rewrite to the CDN (same as upstream)
