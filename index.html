@@ -166,45 +166,22 @@
     }
 
     .hero-ring {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 20px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
-      position: relative;
-      animation: ring-spin 20s linear infinite;
-    }
-
-    .hero-ring::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: 50%;
-    }
-
-    @keyframes ring-spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
     }
 
     .hero-ring svg {
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       stroke: var(--accent);
       fill: none;
       stroke-width: 1.5;
       stroke-linecap: round;
-      animation: ring-spin-reverse 20s linear infinite;
     }
 
     .inline-globe {
@@ -225,15 +202,6 @@
       stroke-linecap: round;
     }
 
-    @keyframes ring-spin-reverse {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(-360deg);
-      }
-    }
 
     .hero h1 {
       font-size: 36px;
@@ -570,13 +538,14 @@
       }
 
       .hero-ring {
-        width: 56px;
-        height: 56px;
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
       }
 
       .hero-ring svg {
-        width: 26px;
-        height: 26px;
+        width: 36px;
+        height: 36px;
       }
 
       .site-desc {
@@ -627,6 +596,7 @@
       </div>
       <h1>interweb</h1>
       <p class="hero-tagline">A curated webring for sites on a similar wavelength.</p>
+      <p class="hero-subtitle">Good design, honest pages, no filler.</p>
       <div class="hero-actions">
         <a href="#join" class="btn btn-primary">Join the ring</a>
         <a href="https://github.com/v8v88v8v88/interweb" class="btn">GitHub ↗</a>
