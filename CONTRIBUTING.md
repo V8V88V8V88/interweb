@@ -1,21 +1,10 @@
 # Contributing to interweb
 
-interweb is a curated webring for solid personal sites and indie pages. Anyone can submit a PR; merges are at the curator’s discretion ([Vaibhav](https://github.com/v8v88v8v88)).
+interweb is a curated webring for solid personal sites and indie pages. Anyone can request to join; merges are at the curator’s discretion ([Vaibhav](https://github.com/v8v88v8v88)).
 
 ## Adding your site
 
-1. **Fork** this repository on GitHub.
-2. **Edit** `webring/sites.json` in your fork and append an entry for your site:
-
-   ```json
-   {
-     "name": "your site name",
-     "url": "https://yoursite.com",
-     "description": "optional short description"
-   }
-   ```
-
-3. **Add webring navigation** on your public site before opening the pull request: either embed the **widget** or use **minimal.js** with your own markup (see `webring/minimal.js` and [README.md](README.md#custom-links)).
+1. **Add webring navigation** to your public site: either embed the **widget** or use **minimal.js** with your own markup (see `webring/minimal.js` and [README.md](README.md#custom-links)).
 
    ```html
    <script
@@ -28,8 +17,12 @@ interweb is a curated webring for solid personal sites and indie pages. Anyone c
 
    Use that `data-ring` URL (jsDelivr) so `fetch()` works from any origin; you do not need to host a copy of `sites.json` yourself.
 
-4. **Open a pull request** against the upstream repository. Continuous integration validates `sites.json` and related checks.
+2. **Fill out the [join form](https://github.com/v8v88v8v88/interweb/issues/new?template=join.yml)** with your site name, URL and a short description.
+3. **The join bot checks your site** in a headless browser and replies on your issue. If the ring links don't work yet, fix your site and edit the issue or comment `/recheck`.
+4. **When the check passes**, the bot opens a pull request with your entry for the maintainer to review.
 5. **After merge**, your site is included in the ring.
+
+**Prefer a pull request?** Fork the repo, append your entry to `webring/sites.json`, and open a PR. CI validates the file and runs the same live check on new entries.
 
 ## Will my site get accepted?
 

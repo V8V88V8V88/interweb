@@ -1,0 +1,86 @@
+name: Join request
+
+# A "[join]" issue (from the issue form) is checked automatically:
+# validation + a live check that the ring navigation works on the site.
+# If it passes, a pull request is opened. The maintainer reviews and merges.
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: join-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check join request
+    if: >-
+      github.event.issue.state == 'open' &&
+      github.event.issue.pull_request == null &&
+      startsWith(github.event.issue.title, '[join]') &&
+      (github.event_name == 'issues' ||
+        (startsWith(github.event.comment.body, '/recheck') &&
+         (github.event.comment.user.login == github.event.issue.user.login ||
+          github.event.comment.author_association == 'OWNER')))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      JOIN_COMMENT_FILE: ${{ runner.temp }}/join-comment.md
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Label issue
+        run: |
+          gh label create join --color 16a34a --description "Request to join the ring" 2>/dev/null || true
+          gh issue edit "$ISSUE_NUMBER" --add-label join || true
+
+      - name: Check site
+        id: check
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/join-request.js
+
+      - name: Open pull request
+        if: steps.check.outputs.ok == 'true'
+        env:
+          SITE_NAME: ${{ steps.check.outputs.name }}
+        run: |
+          branch="join/issue-${ISSUE_NUMBER}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add webring/sites.json
+          git commit -m "ring: add ${SITE_NAME}"
+          git push --force origin "$branch"
+
+          pr=$(gh pr list --head "$branch" --state open --json url --jq '.[0].url')
+          if [ -z "$pr" ]; then
+            pr=$(gh pr create --base main --head "$branch" \
+              --title "Add ${SITE_NAME} to the ring" \
+              --body "Adds the site from #${ISSUE_NUMBER}. The join bot validated the entry and confirmed the ring navigation works on the live site.
+
+          Closes #${ISSUE_NUMBER}")
+          fi
+          printf '\nPull request: %s\n' "$pr" >> "$JOIN_COMMENT_FILE"
+
+      - name: Comment on issue
+        if: always() && steps.check.outcome != 'skipped'
+        run: |
+          [ -f "$JOIN_COMMENT_FILE" ] || printf '### interweb join check\n\n⚠️ The check could not run. The maintainer will take a look.\n' > "$JOIN_COMMENT_FILE"
+          gh issue comment "$ISSUE_NUMBER" --edit-last --body-file "$JOIN_COMMENT_FILE" 2>/dev/null \
+            || gh issue comment "$ISSUE_NUMBER" --body-file "$JOIN_COMMENT_FILE"

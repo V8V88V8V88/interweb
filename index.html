@@ -799,22 +799,14 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
         <span class="num">05</span>
         <h2>Join the ring</h2>
       </div>
-      <p>Complete each step in order. Pull requests are reviewed before merge.</p>
+      <p>Three steps. A bot checks your site, and the maintainer reviews every request.</p>
       <ol class="steps">
-        <li>Fork the <a href="https://github.com/v8v88v8v88/interweb">interweb</a> repository on GitHub.</li>
-        <li>In your fork, edit <code>webring/sites.json</code> and append an object for your site using this shape:
-          <div class="code-block code-sample" style="white-space: pre;">{
-            <span class="hl-attr">"name"</span>: <span class="hl-str">"your site"</span>,
-            <span class="hl-attr">"url"</span>: <span class="hl-str">"https://yoursite.com"</span>,
-            <span class="hl-attr">"description"</span>: <span class="hl-str">"a short description"</span>
-            }
-          </div>
-        </li>
         <li>On your live site, add webring navigation: either the <a href="#embed">widget</a> or <a
-            href="#embed-minimal">custom links</a> via <code>minimal.js</code>, before your pull request is merged.</li>
-        <li>Open a pull request against the upstream repository. Continuous integration validates <code>sites.json</code>
-          and related checks.</li>
-        <li>After your pull request is merged, your site appears in the member list below. <span class="inline-globe" aria-hidden="true"><svg viewBox="0 0 1200 1200"><g transform="translate(0,1200) scale(0.1,-0.1)"><path d="M4052 10592 c-19 -17 -33 -44 -38 -67 -7 -41 -18 -11 170 -468 39
+            href="#embed-minimal">custom links</a> via <code>minimal.js</code>.</li>
+        <li>Fill out the <a href="https://github.com/v8v88v8v88/interweb/issues/new?template=join.yml">join form</a>
+          with your site name, URL and a short description (needs a GitHub account).</li>
+        <li>A bot opens your site, checks the ring links work, and replies on your request. If it passes, a pull
+          request is opened. Once it is merged, your site appears in the member list below. <span class="inline-globe" aria-hidden="true"><svg viewBox="0 0 1200 1200"><g transform="translate(0,1200) scale(0.1,-0.1)"><path d="M4052 10592 c-19 -17 -33 -44 -38 -67 -7 -41 -18 -11 170 -468 39
 -93 63 -165 59 -175 -4 -9 -35 -69 -71 -132 -234 -417 -499 -768 -826 -1096
 -328 -327 -679 -592 -1100 -828 l-138 -78 -62 25 c-355 149 -527 217 -546 217
 -46 0 -92 -32 -112 -78 -19 -42 -19 -46 -3 -88 9 -25 27 -51 39 -59 19 -13
@@ -932,7 +924,9 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
 -940 -68 -1314 -171 -38 -10 -71 -17 -73 -16 -1 2 69 176 156 387 l159 384 39
 14 c136 48 475 113 683 131 69 6 141 13 160 15 60 7 450 -3 555 -14z"/></g></svg></span></li>
       </ol>
-      <div class="note">Membership is curated. Not every pull request is merged.</div>
+      <p style="margin: 22px 0 14px;"><a href="https://github.com/v8v88v8v88/interweb/issues/new?template=join.yml" class="btn btn-primary">Open the join form ↗</a></p>
+      <p style="color: var(--text-muted);">Prefer a pull request? Fork the repo, add your entry to <code>webring/sites.json</code>, and open a PR. The same checks run.</p>
+      <div class="note">Membership is curated. Not every request is merged.</div>
     </section>
 
     <footer>

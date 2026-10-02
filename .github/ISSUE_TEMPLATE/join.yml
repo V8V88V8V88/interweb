@@ -1,0 +1,42 @@
+name: Join the ring
+description: Add your site to interweb. A bot checks your site and opens a pull request for review.
+title: "[join] "
+labels: ["join"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before you submit:** add the ring navigation to your live site, either the [widget](https://v8v88v8v88.com/interweb/#embed) or [custom links](https://v8v88v8v88.com/interweb/#embed-minimal) with `minimal.js`. The bot opens your site and checks that the prev / next links work.
+  - type: input
+    id: name
+    attributes:
+      label: Site name
+      description: Shown in the ring and on the hub.
+      placeholder: your site
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Site URL
+      description: HTTPS only, the page that has the ring navigation.
+      placeholder: https://yoursite.com
+    validations:
+      required: true
+  - type: input
+    id: description
+    attributes:
+      label: Description
+      description: One short line, under 200 characters.
+      placeholder: a short description
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: My site has the interweb ring navigation (widget or minimal.js)
+          required: true
+        - label: It's a personal or indie site, not a commercial product
+          required: true

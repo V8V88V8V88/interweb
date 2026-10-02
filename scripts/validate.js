@@ -19,7 +19,10 @@
 const fs = require('fs')
 const path = require('path')
 
-const SITES_PATH = path.join(__dirname, '..', 'webring', 'sites.json')
+// Optional argument: path to another sites.json (used by the join bot for a candidate list)
+const SITES_PATH = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : path.join(__dirname, '..', 'webring', 'sites.json')
 const MAX_NAME_LEN = 80
 const MAX_DESC_LEN = 200
 const MAX_URL_LEN = 300

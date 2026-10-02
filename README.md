@@ -48,22 +48,23 @@ If you still use the old `https://v8v88v8v88.github.io/interweb/webring/sites.js
 
 ### 2. Join the ring
 
-Submit a pull request when your entry is ready. Merges are reviewed; not every submission is accepted.
+1. Add the widget or `minimal.js` navigation to your live site (step 1 above).
+2. Fill out the **[join form](https://github.com/v8v88v8v88/interweb/issues/new?template=join.yml)** with your site name, URL and a short description.
+3. A bot opens your site in a headless browser, checks the ring links work, and replies on your request. If something is missing it tells you what; fix it, then edit the issue or comment `/recheck`.
+4. When the check passes, the bot opens a pull request with your entry. Merges are reviewed; not every submission is accepted.
+5. After the pull request is merged, your site is live in the ring within a few minutes.
 
-1. Fork this repository.
-2. Add your site to `webring/sites.json` in your fork:
+**Prefer a pull request?** Fork the repo, append your entry to `webring/sites.json`, and open a PR:
 
-   ```json
-   {
-     "name": "your site",
-     "url": "https://yoursite.com",
-     "description": "a short description"
-   }
-   ```
+```json
+{
+  "name": "your site",
+  "url": "https://yoursite.com",
+  "description": "a short description"
+}
+```
 
-3. Add the widget or `minimal.js` navigation on your live site (required before merge).
-4. Open a pull request against this repository. Continuous integration validates `sites.json` and related checks.
-5. After the pull request is merged, your site is included in the ring.
+CI validates the file and runs the same live check on new entries.
 
 ## Widget themes
 
@@ -115,11 +116,16 @@ interweb/
 │   ├── minimal.js              # Same ring logic, only sets your link hrefs
 │   └── widget.css              # Widget styles (auto-loaded by widget.js)
 ├── scripts/
-│   └── validate.js             # CI validation for sites.json
+│   ├── validate.js             # CI validation for sites.json
+│   ├── check-site.js           # Live check: ring navigation works on a site
+│   └── join-request.js         # Join bot: issue form → checks → PR
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   └── join.yml            # "Join the ring" form
 │   ├── workflows/
 │   │   ├── validate.yml        # PR validation workflow
-│   │   └── deploy.yml          # GitHub Pages deployment
+│   │   ├── join.yml            # Join bot workflow
+│   │   └── deploy.yml          # GitHub Pages deployment + jsDelivr purge
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── CONTRIBUTING.md
 ├── LICENSE
@@ -134,9 +140,11 @@ interweb/
 
 3. **Hub** - `index.html` is the landing page showing the full directory, widget demos, embed instructions, and join flow. Supports light and dark mode.
 
-4. **Validation** - On every PR touching `sites.json`, CI runs `scripts/validate.js` which checks JSON validity, required fields, HTTPS, duplicates, and field lengths.
+4. **Validation** - On every PR touching `sites.json`, CI runs `scripts/validate.js` which checks JSON validity, required fields, HTTPS, duplicates, unsafe URL characters, and field lengths. `scripts/check-site.js` then opens each newly added site in headless Chrome and checks the ring navigation actually works.
 
-5. **Deployment** - Push to `main` triggers GitHub Pages deployment of the entire repo.
+5. **Join bot** - A `[join]` issue from the join form runs `scripts/join-request.js` (`.github/workflows/join.yml`): validation, the live site check, a reply on the issue, and a pull request when everything passes. The maintainer merges.
+
+6. **Deployment** - Push to `main` triggers GitHub Pages deployment of the entire repo, then purges the jsDelivr cache so ring changes show up right away.
 
 ## Edge cases handled
 

@@ -5,6 +5,7 @@ on:
     paths:
       - 'webring/sites.json'
       - 'scripts/validate.js'
+      - 'scripts/check-site.js'
 
 jobs:
   validate:
@@ -21,3 +22,11 @@ jobs:
 
       - name: Run validation
         run: node scripts/validate.js
+
+      - name: Check new sites have working ring navigation
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --depth=1 origin "$BASE_SHA"
+          git show "$BASE_SHA:webring/sites.json" > "$RUNNER_TEMP/base-sites.json"
+          node scripts/check-site.js --new-since "$RUNNER_TEMP/base-sites.json"
