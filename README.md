@@ -25,7 +25,6 @@ interweb brings the idea back as a tight, curated loop:
 <script
   src="https://v8v88v8v88.com/interweb/webring/widget.js"
   data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
-  data-theme="retro"
   async
 ></script>
 ```
@@ -66,13 +65,17 @@ If you still use the old `https://v8v88v8v88.github.io/interweb/webring/sites.js
 
 CI validates the file and runs the same live check on new entries.
 
-## Widget themes
+## Widget look
 
-| Theme   | Attribute              | Look                       |
-| ------- | ---------------------- | -------------------------- |
-| Light   | *(omit `data-theme`)*  | Minimal, light background  |
-| Retro   | `data-theme="retro"`   | Green on black, hacker     |
-| Dark    | `data-theme="dark"`    | Purple accent, dark        |
+The widget is a small pill: **← interweb →**. By default it takes your page's text colour and font, so it fits light and dark sites (and theme toggles) without any setup.
+
+| Theme  | Attribute             | Look                                      |
+| ------ | --------------------- | ----------------------------------------- |
+| Auto   | *(omit `data-theme`)* | Follows your page's text colour and font  |
+| Light  | `data-theme="light"`  | Dark text on a faint grey pill            |
+| Dark   | `data-theme="dark"`   | White text on a faint light pill          |
+
+The old `data-theme="retro"` still works and shows the dark look.
 
 ## Widget options
 
@@ -80,7 +83,7 @@ CI validates the file and runs the same live check on new entries.
 | -------------- | -------- | ------------ | ------------------------------------ |
 | `src`          | ✓        | -            | URL to `widget.js`                   |
 | `data-ring`    |          | *(canonical jsDelivr URL)* | URL to `sites.json` (must allow CORS; see above) |
-| `data-theme`   |          | *(light)*    | `"retro"` or `"dark"`                |
+| `data-theme`   |          | *(auto)*     | `"light"` or `"dark"`                |
 | `data-label`   |          | `"interweb"` | Custom ring name in the widget       |
 | `data-hub`     |          | *(auto)*     | URL the ring name links to           |
 

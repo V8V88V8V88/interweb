@@ -10,7 +10,6 @@ interweb is a curated webring for solid personal sites and indie pages. Anyone c
    <script
      src="https://v8v88v8v88.com/interweb/webring/widget.js"
      data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
-     data-theme="retro"
      async
    ></script>
    ```
@@ -50,7 +49,7 @@ Things that won't make it:
 | Attribute      | Default      | Description                       |
 | -------------- | ------------ | --------------------------------- |
 | `data-ring`    | *(default: canonical jsDelivr URL)* | URL to `sites.json` (must allow CORS; see README) |
-| `data-theme`   | *(none)*     | `"retro"`, `"dark"`, or omit for light |
+| `data-theme`   | *(auto)*     | `"light"` or `"dark"`; omit to follow your page's colours |
 | `data-label`   | `"interweb"` | Custom label shown in the widget  |
 | `data-hub`     | *(auto)*     | Link for the ring name            |
 

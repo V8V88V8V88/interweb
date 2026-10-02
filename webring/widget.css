@@ -1,123 +1,94 @@
 /* ============================================================
-   interweb widget — embeddable webring navigation
-   Minimal by default. Retro/hacker theme via data-theme="retro".
+   interweb widget — a small pill:  ←  interweb  →
+   Default: takes the host page's text colour and font, so it fits
+   light and dark sites (and theme toggles) on its own.
+   data-theme="light" / "dark" force one look.
    ============================================================ */
 
-/* --- Reset & host isolation --- */
-.interweb-widget *,
-.interweb-widget *::before,
-.interweb-widget *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* --- Base (minimal / light) --- */
 .interweb-widget {
-  --vb-font: 'Courier New', 'Courier', monospace;
-  --vb-bg: #fafafa;
-  --vb-border: #d0d0d0;
-  --vb-text: #333;
-  --vb-link: #555;
-  --vb-link-hover: #000;
-  --vb-accent: #888;
-  --vb-radius: 6px;
-  --vb-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --vb-transition: 0.15s ease;
-
-  font-family: var(--vb-font);
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--vb-text);
-  background: var(--vb-bg);
-  border: 1px solid var(--vb-border);
-  border-radius: var(--vb-radius);
-  box-shadow: var(--vb-shadow);
-  padding: 10px 14px;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  max-width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: inherit;
+  /* fallback for browsers without color-mix() */
+  background: rgba(128, 128, 128, 0.08);
+  border: 1px solid rgba(128, 128, 128, 0.14);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  border-color: color-mix(in srgb, currentColor 8%, transparent);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
-/* --- Retro / hacker theme --- */
-.interweb-widget[data-theme="retro"] {
-  --vb-bg: #0a0a0a;
-  --vb-border: #2a2a2a;
-  --vb-text: #b0b0b0;
-  --vb-link: #00cc66;
-  --vb-link-hover: #00ff88;
-  --vb-accent: #00cc66;
-  --vb-shadow: 0 0 8px rgba(0, 204, 102, 0.12);
+.interweb-widget:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-color: color-mix(in srgb, currentColor 15%, transparent);
 }
 
-/* --- Dark theme --- */
+/* --- Forced themes (same colours as v8v88v8v88.com) --- */
 .interweb-widget[data-theme="dark"] {
-  --vb-bg: #1a1a2e;
-  --vb-border: #2d2d44;
-  --vb-text: #c0c0d0;
-  --vb-link: #a78bfa;
-  --vb-link-hover: #c4b5fd;
-  --vb-accent: #a78bfa;
-  --vb-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  background: #ffffff0f;
+  border-color: #ffffff14;
 }
 
-/* --- Navigation links --- */
+.interweb-widget[data-theme="dark"]:hover {
+  background: #ffffff1a;
+  border-color: #ffffff26;
+}
+
+.interweb-widget[data-theme="light"] {
+  color: #000;
+  background: #0000000a;
+  border-color: #0000000f;
+}
+
+.interweb-widget[data-theme="light"]:hover {
+  background: #00000014;
+  border-color: #0000001a;
+}
+
+/* --- Links --- */
 .interweb-widget a {
-  color: var(--vb-link);
+  color: inherit;
+  opacity: 0.6;
   text-decoration: none;
-  transition: color var(--vb-transition), opacity var(--vb-transition);
-  white-space: nowrap;
+  transition: opacity 0.2s ease;
 }
 
 .interweb-widget a:hover,
 .interweb-widget a:focus-visible {
-  color: var(--vb-link-hover);
-  text-decoration: underline;
-  outline: none;
+  opacity: 1;
 }
 
-/* --- Separator --- */
-.interweb-sep {
-  color: var(--vb-accent);
-  opacity: 0.5;
-  user-select: none;
+.interweb-widget a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* --- Ring label --- */
-.interweb-label {
-  color: var(--vb-accent);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: lowercase;
-  white-space: nowrap;
+.interweb-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0.2rem;
 }
 
-.interweb-label a {
-  color: inherit;
+.interweb-hub {
+  font-weight: 500;
 }
 
-.interweb-label a:hover {
-  color: var(--vb-link-hover);
+/* --- Loading / error --- */
+.interweb-widget[data-state="loading"] .interweb-arrow {
+  opacity: 0.3;
+  pointer-events: none;
 }
 
-/* --- Error / loading states --- */
-.interweb-widget[data-state="loading"] {
-  opacity: 0.6;
-}
-
-.interweb-widget[data-state="error"] {
-  opacity: 0.5;
-  font-style: italic;
-}
-
-/* --- Responsive --- */
-@media (max-width: 400px) {
-  .interweb-widget {
-    font-size: 12px;
-    padding: 8px 10px;
-    gap: 6px;
-  }
+.interweb-widget[data-state="error"] .interweb-arrow {
+  display: none;
 }

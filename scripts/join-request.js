@@ -29,7 +29,6 @@ const EMBED = [
   '<script',
   '  src="https://v8v88v8v88.com/interweb/webring/widget.js"',
   '  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"',
-  '  data-theme="retro"',
   '  async',
   '></script>',
   '```',
