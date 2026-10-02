@@ -36,3 +36,20 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  purge-cdn:
+    # jsDelivr caches @main files for up to 12h; purge so ring changes show up right away.
+    # Never blocks or fails the deploy.
+    name: Purge jsDelivr cache
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Purge ring files
+        run: |
+          for repo in interweb vaibring; do
+            for f in sites.json widget.css widget.js minimal.js; do
+              url="https://purge.jsdelivr.net/gh/v8v88v8v88/${repo}@main/webring/${f}"
+              echo "purge ${url}"
+              curl -fsS --retry 3 --max-time 30 "${url}" > /dev/null || echo "::warning::purge failed for ${url}"
+            done
+          done

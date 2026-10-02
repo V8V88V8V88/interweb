@@ -19,7 +19,7 @@ interweb is a curated webring for solid personal sites and indie pages. Anyone c
 
    ```html
    <script
-     src="https://v8v88v8v88.github.io/interweb/webring/widget.js"
+     src="https://v8v88v8v88.com/interweb/webring/widget.js"
      data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
      data-theme="retro"
      async

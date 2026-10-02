@@ -13,6 +13,7 @@
  *  6. No duplicate names
  *  7. Reasonable field lengths
  *  8. No trailing slashes on URLs (consistency)
+ *  9. No quotes, angle brackets or whitespace in URLs (they end up in href attributes)
  */
 
 const fs = require('fs')
@@ -22,6 +23,7 @@ const SITES_PATH = path.join(__dirname, '..', 'webring', 'sites.json')
 const MAX_NAME_LEN = 80
 const MAX_DESC_LEN = 200
 const MAX_URL_LEN = 300
+const UNSAFE_URL_CHARS = /[\s"'<>`\\]/
 
 let exitCode = 0
 const errors = []
@@ -107,6 +109,10 @@ sites.forEach((site, i) => {
       error(`${prefix} URL must use HTTPS: "${site.url}"`)
     }
 
+    if (UNSAFE_URL_CHARS.test(site.url)) {
+      error(`${prefix} URL contains quotes, angle brackets, backslashes or whitespace: "${site.url}"`)
+    }
+
     if (site.url.length > MAX_URL_LEN) {
       error(`${prefix} URL exceeds ${MAX_URL_LEN} characters`)
     }
@@ -141,6 +147,9 @@ sites.forEach((site, i) => {
         }
         if (ap.protocol !== 'https:') {
           error(`${prefix} Alias must use HTTPS: "${alias}"`)
+        }
+        if (UNSAFE_URL_CHARS.test(alias)) {
+          error(`${prefix} Alias contains quotes, angle brackets, backslashes or whitespace: "${alias}"`)
         }
         const normAlias = ap.host.replace(/^www\./, '') + ap.pathname.replace(/\/+$/, '')
         if (seenUrls.has(normAlias)) {

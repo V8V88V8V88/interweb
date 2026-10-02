@@ -8,7 +8,7 @@
  *   <a data-interweb="random" href="#">?</a>
  *   <a data-interweb="next" href="#">→</a>
  *   <script
- *     src="https://v8v88v8v88.github.io/interweb/webring/minimal.js"
+ *     src="https://v8v88v8v88.com/interweb/webring/minimal.js"
  *     data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
  *     async
  *   ></script>

@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'webring/sites.json'
+      - 'scripts/validate.js'
 
 jobs:
   validate:

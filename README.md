@@ -23,7 +23,7 @@ interweb brings the idea back as a tight, curated loop:
 
 ```html
 <script
-  src="https://v8v88v8v88.github.io/interweb/webring/widget.js"
+  src="https://v8v88v8v88.com/interweb/webring/widget.js"
   data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
   data-theme="retro"
   async
@@ -92,7 +92,7 @@ Use `minimal.js` instead of the widget when you want your own HTML/CSS. Add thre
 <a data-interweb="random" href="#">random</a>
 <a data-interweb="next" href="#">→</a>
 <script
-  src="https://v8v88v8v88.github.io/interweb/webring/minimal.js"
+  src="https://v8v88v8v88.com/interweb/webring/minimal.js"
   data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"
   async
 ></script>
@@ -102,7 +102,7 @@ Use `minimal.js` instead of the widget when you want your own HTML/CSS. Add thre
 
 - **Links stay `#` or jump to the top of the page** — `minimal.js` / `widget.js` never set `href` because `fetch()` failed. Open DevTools → Network: if `sites.json` is red/blocked, fix `data-ring` (use the jsDelivr URL above). For third-party ring files, the host must send `Access-Control-Allow-Origin` on GET.
 - **Widget shows “ring unavailable”** — same fetch failure or invalid JSON.
-- **Script `src` from `github.io` is fine** — only the JSON request is subject to CORS; loading `widget.js` / `minimal.js` via `<script src>` is not the problem.
+- **Old script `src` on `v8v88v8v88.github.io/interweb/...` still works** — it redirects to `v8v88v8v88.com/interweb/...`. Switching to the `v8v88v8v88.com` URL just skips that redirect. Only the JSON request is subject to CORS; loading `widget.js` / `minimal.js` via `<script src>` is not the problem.
 
 ## Project structure
 

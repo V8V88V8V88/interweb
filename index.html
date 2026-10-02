@@ -747,7 +747,7 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
           class="hl-comment">&lt;!-- interweb widget --&gt;</span>
         <span class="hl-tag">&lt;script</span>
         <span class="hl-attr">src</span>=<span
-          class="hl-str">"https://v8v88v8v88.github.io/interweb/webring/widget.js"</span>
+          class="hl-str">"https://v8v88v8v88.com/interweb/webring/widget.js"</span>
         <span class="hl-attr">data-ring</span>=<span
           class="hl-str">"https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"</span>
         <span class="hl-attr">data-theme</span>=<span class="hl-str">"retro"</span>
@@ -783,7 +783,7 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
           class="hl-tag">&gt;</span>→<span class="hl-tag">&lt;/a&gt;</span>
         <span class="hl-tag">&lt;script</span>
         <span class="hl-attr">src</span>=<span
-          class="hl-str">"https://v8v88v8v88.github.io/interweb/webring/minimal.js"</span>
+          class="hl-str">"https://v8v88v8v88.com/interweb/webring/minimal.js"</span>
         <span class="hl-attr">data-ring</span>=<span
           class="hl-str">"https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"</span>
         <span class="hl-attr">async</span>
@@ -935,20 +935,6 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
       <div class="note">Membership is curated. Not every pull request is merged.</div>
     </section>
 
-    <section id="about">
-      <div class="section-header">
-        <span class="num">06</span>
-        <h2>About</h2>
-      </div>
-      <p>
-        A <strong>webring</strong> is a circle of websites linked together — prev, random, next. No algorithm, no feed. Just sites people curated together.
-      </p>
-      <p>
-        <strong>interweb</strong> is one such ring, run by <a href="https://github.com/v8v88v8v88">V8</a>.
-        <a href="https://github.com/v8v88v8v88/interweb">Source on GitHub →</a>
-      </p>
-    </section>
-
     <footer>
       <p>interweb · <a href="https://github.com/v8v88v8v88/interweb">source</a> · curated by <a href="https://github.com/v8v88v8v88">vaibhav</a></p>
     </footer>
@@ -970,12 +956,6 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
       const saved = localStorage.getItem('interweb-theme');
       if (saved) document.documentElement.setAttribute('data-mode', saved);
     })();
-
-    function esc(str) {
-      const d = document.createElement('div');
-      d.textContent = str;
-      return d.innerHTML;
-    }
 
     function normalise(url) {
       try {
@@ -1262,11 +1242,18 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
         valid.forEach((site, i) => {
           const li = document.createElement('li');
           li.className = 'site-item';
-          li.innerHTML = `
-            <span class="site-index">${String(i).padStart(2, '0')}</span>
-            <a class="site-name" href="${esc(site.url)}" rel="noopener">${esc(site.name)}</a>
-            <span class="site-desc">${esc(site.description || '')}</span>
-          `;
+          const index = document.createElement('span');
+          index.className = 'site-index';
+          index.textContent = String(i).padStart(2, '0');
+          const name = document.createElement('a');
+          name.className = 'site-name';
+          name.href = site.url;
+          name.rel = 'noopener';
+          name.textContent = site.name || '';
+          const desc = document.createElement('span');
+          desc.className = 'site-desc';
+          desc.textContent = site.description || '';
+          li.append(index, name, desc);
           list.appendChild(li);
         });
         wireWidgetPreviews(valid);
@@ -1277,7 +1264,7 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
       });
 
     function copyEmbed() {
-      const code = `<!-- interweb widget -->\n<script\n  src="https://v8v88v8v88.github.io/interweb/webring/widget.js"\n  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"\n  data-theme="retro"\n  async\n><\/script>`;
+      const code = `<!-- interweb widget -->\n<script\n  src="https://v8v88v8v88.com/interweb/webring/widget.js"\n  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"\n  data-theme="retro"\n  async\n><\/script>`;
       navigator.clipboard.writeText(code).then(() => {
         const btn = document.querySelector('#embed-code .copy-btn');
         btn.textContent = 'copied!';
@@ -1286,7 +1273,7 @@ c-547 114 -1061 116 -1606 4 l-160 -32 13 30 c7 17 41 99 75 181 34 83 76 182
     }
 
     function copyEmbedMinimal() {
-      const code = `<!-- your markup -->\n<a data-interweb="prev" href="#">←</a>\n<a data-interweb="random" href="#">random</a>\n<a data-interweb="next" href="#">→</a>\n<script\n  src="https://v8v88v8v88.github.io/interweb/webring/minimal.js"\n  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"\n  async\n><\/script>`;
+      const code = `<!-- your markup -->\n<a data-interweb="prev" href="#">←</a>\n<a data-interweb="random" href="#">random</a>\n<a data-interweb="next" href="#">→</a>\n<script\n  src="https://v8v88v8v88.com/interweb/webring/minimal.js"\n  data-ring="https://cdn.jsdelivr.net/gh/v8v88v8v88/interweb@main/webring/sites.json"\n  async\n><\/script>`;
       navigator.clipboard.writeText(code).then(() => {
         const btn = document.querySelector('#embed-minimal-code .copy-btn');
         btn.textContent = 'copied!';
