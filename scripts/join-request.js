@@ -3,7 +3,7 @@
 /**
  * interweb — join request bot
  *
- * Runs in CI on "[join]" issues (opened from .github/ISSUE_TEMPLATE/join.yml).
+ * Runs in CI on join issues (opened from .github/ISSUE_TEMPLATE/join.yml).
  *  1. Reads name / URL / description from the issue form.
  *  2. Validates the would-be sites.json with scripts/validate.js.
  *  3. Opens the site in headless Chrome to confirm the ring navigation works.

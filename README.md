@@ -142,7 +142,7 @@ interweb/
 
 4. **Validation** - On every PR touching `sites.json`, CI runs `scripts/validate.js` which checks JSON validity, required fields, HTTPS, duplicates, unsafe URL characters, and field lengths. `scripts/check-site.js` then opens each newly added site in headless Chrome and checks the ring navigation actually works.
 
-5. **Join bot** - A `[join]` issue from the join form runs `scripts/join-request.js` (`.github/workflows/join.yml`): validation, the live site check, a reply on the issue, and a pull request when everything passes. The maintainer merges.
+5. **Join bot** - An issue from the join form runs `scripts/join-request.js` (`.github/workflows/join.yml`): validation, the live site check, a reply on the issue, and a pull request when everything passes. The maintainer merges.
 
 6. **Deployment** - Push to `main` triggers GitHub Pages deployment of the entire repo, then purges the jsDelivr cache so ring changes show up right away.
 

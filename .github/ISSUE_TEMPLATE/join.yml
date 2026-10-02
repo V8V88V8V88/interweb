@@ -1,6 +1,6 @@
 name: Join the ring
 description: Add your site to interweb. A bot checks your site and opens a pull request for review.
-title: "[join] "
+title: "[join] "  # the bot rewrites this to "[join] <site name>"
 labels: ["join"]
 body:
   - type: markdown

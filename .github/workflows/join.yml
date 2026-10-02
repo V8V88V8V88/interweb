@@ -1,6 +1,6 @@
 name: Join request
 
-# A "[join]" issue (from the issue form) is checked automatically:
+# A join request (an issue from the join form) is checked automatically:
 # validation + a live check that the ring navigation works on the site.
 # If it passes, a pull request is opened. The maintainer reviews and merges.
 
@@ -25,7 +25,8 @@ jobs:
     if: >-
       github.event.issue.state == 'open' &&
       github.event.issue.pull_request == null &&
-      startsWith(github.event.issue.title, '[join]') &&
+      (contains(github.event.issue.body, '### Site URL') ||
+        contains(github.event.issue.labels.*.name, 'join')) &&
       (github.event_name == 'issues' ||
         (startsWith(github.event.comment.body, '/recheck') &&
          (github.event.comment.user.login == github.event.issue.user.login ||
@@ -54,6 +55,12 @@ jobs:
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: node scripts/join-request.js
+
+      - name: Set issue title
+        if: steps.check.outputs.name != ''
+        env:
+          SITE_NAME: ${{ steps.check.outputs.name }}
+        run: gh issue edit "$ISSUE_NUMBER" --title "[join] ${SITE_NAME}" || true
 
       - name: Open pull request
         if: steps.check.outputs.ok == 'true'
