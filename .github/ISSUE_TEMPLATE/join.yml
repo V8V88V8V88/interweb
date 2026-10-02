@@ -1,22 +1,13 @@
 name: Join the ring
 description: Add your site to interweb. A bot checks your site and opens a pull request for review.
-title: "Join request"  # any title works; the bot sets it to "[join] <site name>"
 labels: ["join"]
 body:
   - type: markdown
     attributes:
       value: |
-        You can leave the title as is; it is set automatically from your site name.
+        **Title = your site name.** It is shown in the ring and on the hub.
 
         **Before you submit:** add the ring navigation to your live site, either the [widget](https://v8v88v8v88.com/interweb/#embed) or [custom links](https://v8v88v8v88.com/interweb/#embed-minimal) with `minimal.js`. The bot opens your site and checks that the prev / next links work.
-  - type: input
-    id: name
-    attributes:
-      label: Site name
-      description: Shown in the ring and on the hub.
-      placeholder: your site
-    validations:
-      required: true
   - type: input
     id: url
     attributes:

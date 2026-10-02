@@ -4,13 +4,13 @@
  * interweb — join request bot
  *
  * Runs in CI on join issues (opened from .github/ISSUE_TEMPLATE/join.yml).
- *  1. Reads name / URL / description from the issue form.
+ *  1. Reads the site name from the issue title, URL / description from the form.
  *  2. Validates the would-be sites.json with scripts/validate.js.
  *  3. Opens the site in headless Chrome to confirm the ring navigation works.
  *  4. If everything passes, appends the entry to webring/sites.json
  *     (the workflow then opens a pull request for the maintainer to merge).
  *
- * Input:  ISSUE_BODY (env)
+ * Input:  ISSUE_TITLE, ISSUE_BODY (env)
  * Output: comment markdown at $JOIN_COMMENT_FILE, and ok / name in $GITHUB_OUTPUT.
  */
 
@@ -51,9 +51,10 @@ function parseForm(body) {
 
 const oneLine = (s) => String(s || '').replace(/\s+/g, ' ').trim()
 
-function buildEntry(fields) {
+function buildEntry(title, fields) {
   const entry = {
-    name: oneLine(fields['Site name']),
+    // The issue title is the site name ("[join] " left over from older forms is dropped)
+    name: oneLine(title).replace(/^\[join\]\s*/i, ''),
     url: oneLine(fields['Site URL']).replace(/^<|>$/g, ''),
   }
   // https://example.com/ and https://example.com/blog/ → no trailing slash
@@ -94,12 +95,12 @@ function finish(ok, lines, entry) {
 
 ;(async () => {
   const fields = parseForm(process.env.ISSUE_BODY)
-  const entry = buildEntry(fields)
+  const entry = buildEntry(process.env.ISSUE_TITLE, fields)
   const header = '<!-- interweb-join-bot -->\n### interweb join check'
   const retry = '_Fix the issue above, then edit this issue or comment `/recheck` to run the check again._'
 
   if (!entry.name || !entry.url) {
-    return finish(false, [header, '', '❌ The form is missing the site name or URL.', '', retry], entry)
+    return finish(false, [header, '', '❌ The request is missing the site name (the issue title) or the site URL.', '', retry], entry)
   }
 
   // 1. Validate the list as it would look with this site added

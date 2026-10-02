@@ -53,14 +53,9 @@ jobs:
       - name: Check site
         id: check
         env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: node scripts/join-request.js
-
-      - name: Set issue title
-        if: steps.check.outputs.name != ''
-        env:
-          SITE_NAME: ${{ steps.check.outputs.name }}
-        run: gh issue edit "$ISSUE_NUMBER" --title "[join] ${SITE_NAME}" || true
 
       - name: Open pull request
         if: steps.check.outputs.ok == 'true'
