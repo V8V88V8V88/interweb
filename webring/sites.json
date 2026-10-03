@@ -10,7 +10,7 @@
     "name": "abneeeees",
     "url": "https://abneeeees.is-a.dev",
     "aliases": ["https://abneeeees.github.io"],
-    "description": "abneeeees is a digital artist from dilli, India"
+    "description": "abneeeees is a CS student from dilli, India"
   },
 
   {
@@ -25,5 +25,11 @@
     "url": "https://walkingdead1407.xyz",
     "aliases": ["https://walkingdead1407.github.io"],
     "description": "Tooshar is a part-time human, full-time bug creator and slowly becoming a data scientist."
+  },
+
+  {
+    "name": "abneeeees-art",
+    "url": "https://abneeeees.vercel.app",
+    "description": "abneeeees is a digital artist from dilli, India"
   }
 ]
