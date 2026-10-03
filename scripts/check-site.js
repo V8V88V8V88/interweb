@@ -110,6 +110,7 @@ async function checkSite(url, chrome) {
     })
     result.status = res.status
     result.reachable = res.ok
+    result.finalUrl = res.url
     if (!res.ok) {
       result.problems.push(`The site answered with HTTP ${res.status}.`)
       return result
@@ -153,6 +154,17 @@ async function checkSite(url, chrome) {
     } else {
       result.problems.push('No interweb ring navigation found on the page.')
     }
+  }
+
+  // The ring finds the current site by its address, so the listed URL must be
+  // where visitors actually end up, not an address that redirects elsewhere.
+  const hostOf = (u) => new URL(u).host.replace(/^www\./, '').toLowerCase()
+  if (result.finalUrl && hostOf(result.finalUrl) !== hostOf(url)) {
+    const final = result.finalUrl.replace(/\/+$/, '')
+    result.ok = false
+    result.problems = [
+      `${url} redirects to ${final}. Use ${final} as the URL (the ring matches sites by their final address); the old address can be listed under "aliases".`,
+    ]
   }
   return result
 }
