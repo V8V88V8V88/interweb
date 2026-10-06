@@ -257,7 +257,7 @@
       console.warn(
         '[interweb] Could not load ring JSON from',
         FETCH_RING_URL,
-        '— check Network tab (CORS or blocked request). Use data-ring with the jsDelivr URL from the interweb README, or ensure your ring file allows cross-origin GET.',
+        '— check Network tab (CORS or blocked request). Leave data-ring out to use the main ring, or make sure your ring file allows cross-origin GET.',
         err
       )
       widget.setAttribute('data-state', 'error')

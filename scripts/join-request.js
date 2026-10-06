@@ -132,7 +132,7 @@ function finish(ok, lines, entry) {
         '',
         EMBED,
         '',
-        'Or use your own links with `minimal.js` (see the [README](https://github.com/v8v88v8v88/interweb#custom-links)).',
+        'Or use your own links with `minimal.js` (see the [README](https://github.com/v8v88v8v88/interweb#add-it-to-your-site)).',
         '',
         retry,
       ],

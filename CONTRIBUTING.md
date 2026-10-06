@@ -4,7 +4,7 @@ interweb is a curated webring for solid personal sites and indie pages. Anyone c
 
 ## Adding your site
 
-1. **Add webring navigation** to your public site: either embed the **widget** or use **minimal.js** with your own markup (see `webring/minimal.js` and [README.md](README.md#custom-links)).
+1. **Add webring navigation** to your public site: either embed the **widget** or use **minimal.js** with your own markup (see `webring/minimal.js` and [README.md](README.md#add-it-to-your-site)).
 
    ```html
    <script
@@ -48,12 +48,12 @@ Things that won't make it:
 
 | Attribute      | Default      | Description                       |
 | -------------- | ------------ | --------------------------------- |
-| `data-ring`    | *(default: canonical jsDelivr URL)* | URL to `sites.json` (must allow CORS; see README) |
+| `data-ring`    | *(default: canonical jsDelivr URL)* | URL to `sites.json`; leave it out to use the main ring (must allow CORS) |
 | `data-theme`   | *(auto)*     | `"light"` or `"dark"`; omit to follow your page's colours |
 | `data-label`   | `"interweb"` | Custom label shown in the widget  |
 | `data-hub`     | *(auto)*     | Link for the ring name            |
 
-**minimal.js** — same `data-ring` as the widget. Mark elements with `data-interweb="prev"`, `"random"`, `"next"`, or pass `data-prev` / `data-next` / `data-random` (CSS selectors). See the main README.
+**minimal.js** — same `data-ring` as the widget. Mark elements with `data-interweb="prev"`, `"random"`, `"next"`, or pass `data-prev` / `data-next` / `data-random` (CSS selectors).
 
 ## Reporting issues
 

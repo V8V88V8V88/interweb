@@ -217,7 +217,7 @@
         console.warn(
           '[interweb] minimal.js could not load ring JSON from',
           FETCH_RING_URL,
-          '— prev/next/random links stay as #. Use data-ring with the jsDelivr sites.json URL (see interweb README); GitHub Pages JSON is often blocked by CORS for cross-origin fetch.',
+          '— prev/next/random links stay as #. Leave data-ring out to use the main ring, or make sure your ring file allows cross-origin GET.',
           err
         )
       })
