@@ -151,7 +151,7 @@ function finish(ok, lines, entry) {
       '',
       ...entryBlock,
       '',
-      'A pull request with this entry is ready for the maintainer to review. Membership is curated, so not every request is merged.',
+      "I've opened a pull request with your site. We check every site before adding it, so it may take a day or two.",
     ],
     entry
   )
