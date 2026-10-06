@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-mode="light">
+<html lang="en" data-mode="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,14 @@
   <title>interweb</title>
   <meta name="description"
     content="Personal websites, linked in a ring.">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#0b0b0b">
+  <script>
+    // dark by default; keep a visitor's saved choice (runs before the page paints)
+    try {
+      var saved = localStorage.getItem('interweb-theme');
+      if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-mode', saved);
+    } catch (e) {}
+  </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3E.s{fill:%23171717}@media (prefers-color-scheme:dark){.s{fill:%23ececec}}%3C/style%3E%3Crect class='s' x='13' y='12' width='6' height='18' rx='1.2'/%3E%3Crect x='13' y='3.5' width='6' height='6' rx='2' fill='%2322c55e'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +87,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
     }
 
     body {
@@ -170,7 +178,7 @@
       top: -60px;
       left: 50%;
       transform: translateX(-50%);
-      width: 500px;
+      width: min(500px, 100vw);
       height: 300px;
       background: radial-gradient(ellipse, rgba(34, 197, 94, 0.06) 0%, transparent 70%);
       pointer-events: none;
@@ -770,13 +778,9 @@
       const current = html.getAttribute('data-mode');
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-mode', next);
-      localStorage.setItem('interweb-theme', next);
+      try { localStorage.setItem('interweb-theme', next); } catch (e) {}
     }
 
-    (function () {
-      const saved = localStorage.getItem('interweb-theme');
-      if (saved) document.documentElement.setAttribute('data-mode', saved);
-    })();
 
     document.getElementById('embed').addEventListener(
       'click',
